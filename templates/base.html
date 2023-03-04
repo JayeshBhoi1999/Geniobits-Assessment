@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>  
+<body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% for message in messages %}
+    
+    {% endfor%}
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Shopping Cart</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/history">History <span class="sr-only">(current)</span></a>
+        </li>
+          
+          
+          
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="/signout">Logout</a></button>
+        </form>
+        <button type="button" class="btn btn-secondary mx-2" data-container="body" id="popcart" data-toggle="popover" data-placement="bottom" data-html="true" data-content="No Items In Cart">
+Cart(<span id="cart">0</span>)
+</button>
+        
+      </div>
+    </nav>
+    <div class="body" >
+    {% block index  %}
+    {% endblock  %}
+    
+    {% block checkout  %}
+    {% endblock  %}
+    
+    {% block order_history  %}
+    {% endblock  %}
+    
+    </div>
+  
+    {% else %}
+    <div class="container"  >
+    <h3>welcome to shopping Cart</h3>
+    <button type="submit" class="btn btn-danger" ><a href="/signup">Signup</a></button>
+    <button type="submit" class="btn btn-danger" ><a href="/signin">Signin</a></button>
+    </div>
+    {% endif %}
+
+    <style>
+      *{
+        padding: 0;
+        margin:0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+        list-style: none;
+    }
+    :root{
+        --bg-color:#fff;
+        --text-color : #222327;
+        --main-color:#FF0000
+        ;
+    }
+    body{
+    min-height: 100vh;
+    background: var(--bg-color);
+    
+    display: flex;
+    flex-direction: column;
+    }
+    header{
+        background: var(--bg-color);
+        color:var(--text-color);
+        position: relative;
+        width: 100%;
+        height: 80px;
+        top:0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 28px 12%;
+        transition: all .50s ease;
+        box-shadow: 3px 3px 3px #888888;
+    }
+    
+    .logo{
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+    
+    .logo i{
+        color: var(--main-color);
+        font-size: 28px;
+        margin-right: 3px;
+    }
+    
+    .logo span {
+        color: var(--text-color);
+        font-size: 20px;
+        color: orangered;
+        font-weight: 600;
+    }
+    .mynavbar {
+        display: flex;
+        align-items: center;
+    }
+    
+    .mynavbar a{
+        color: var(--text-color);
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: 5px 0;
+        margin: 0px 10px;
+        transition: all .50s ease;
+        text-decoration: none;
+    }
+    .mynavbar a:hover{
+        color: var(--main-color);
+        transform: translateY(-5px);
+    }
+    .mynavbar a.active{
+        color: var(--main-color)
+    }
+    
+    .main{
+        position:absolute;
+        display: flex;
+        align-items: center;
+    }
+    .main a{
+        margin-right: 50px;
+        margin-left: 10px;
+        color:var(--text-color);
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: all .50s ease;
+    
+    }
+    .user{
+        display: flex;
+        align-items: center;
+        color: var(--text-color);
+        text-decoration: none;
+    }
+    .user:hover{
+        color: var(--main-color);
+    }
+    .user i{
+        color: var(--main-color);
+        font-size: 28px;
+        margin-right: 7px;
+    }
+    .main a:hover{
+        color: var(--main-color);
+    }
+    #menu-icon{
+        font-size: 35px;
+        color: orangered;
+        cursor: pointer;
+        z-index: 10001;
+        display: none;
+        
+    }
+    
+    @media (max-width:1280px){
+        header{
+            padding: 14px 2%;
+            transition: .2s;
+            height: 80px;
+        }
+        .mynavbar a{
+            padding: 5px 0;
+            margin:0px 10px;
+    
+        }
+    
+    }
+    @media (max-width:1080px){
+        #menu-icon{
+            display: block;
+        }
+        .mynavbar{
+            position:absolute;      
+            width: 270px;
+            height:80vh;
+            background: #d9dbda ;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-radius: 10px;
+            transition: all .50s ease;
+        }
+        .mynavbar a{
+            display: block;
+            margin: 12px 0;
+            padding: 0px 25px;
+            transition: all 0.5s ease;
+        }
+    
+    
+        .mynavbar a.active{
+            color: var(--text-color);
+        }
+        .mynavbar.open{
+            top: 100%;
+            display: flex;
+            transition: all .50s ease;
+        }
+        .main{
+            position:relative;
+            display: flex;
+            align-items: center;
+        }
+    }
+    
+    
+    
+    
+    .mycontainer{
+        margin: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+        grid-gap: 5px;
+        background-color: #efefef;
+     }
+     .card{
+        background-color: #fff;
+        width: auto;
+        height: 340px;
+        border-radius: 10px;
+        
+     }
+     .card .imgContainer{
+         width: 100%;
+         height: 200px;
+         position: relative;
+     }
+     .card .imgContainer img{
+         width: 100%;
+         height: 100%;
+         border-radius: 5px;
+         
+     }
+     .card .imgContainer img:nth-child(2){
+         position: absolute;
+         top: -20;
+         left: 0;
+         opacity: 0;
+         transition: 0.5s all;
+     }
+     .card .imgContainer:hover img:nth-child(2){
+         opacity: 1;
+         top: 0;
+     }
+     .infoBox{
+         padding-left: 5px;
+         padding-right: 5px;
+         padding-bottom: 5px;
+     }
+     .infoBox .rating {
+         margin: 5px 0;
+     }
+     .infoBox .rating img{
+         height: 12px;
+     }
+     .infoBox .title{
+         font-weight: 22px;
+         color: #444;
+         font-family:"Poppins",sans-serif ;
+     
+     }
+     .infoBox .price{
+         font-size: 22px;
+         font-weight: 300;
+         color: rgb(40, 40, 40);
+         font-family: "Poppins",sans-serif;
+     }
+     .infoBox .buttonGroup{
+         display: flex;
+         justify-content: space-between;
+         
+     
+     }
+     .infoBox .buttonGroup button{
+         border: 0;
+         outline: 0;
+         color: #fff;
+         padding: 2px 4px;
+         font-family: "Poppins",sans-serif;
+     }
+     
+     .infoBox .buttonGroup button.buy{
+         background-color:#ff9f00 ;
+         border-radius: 5px;
+         padding-left: 6px;
+         padding-right: 6px;
+     }
+     
+     .infoBox .buttonGroup button.addToCart{
+         background-color: #fb641b;
+         border-radius: 5px;
+     }
+    
+    </style>
+
+
+</body>
+</html>
