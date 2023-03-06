@@ -66,8 +66,7 @@ def signin(request):
         pass1 = request.POST['pass1']
 
         user = authenticate(username=username,password=pass1)
-
-        
+    
         if user is not None:
             login(request,user)
             fname = user.first_name

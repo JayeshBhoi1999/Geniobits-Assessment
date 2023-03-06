@@ -9,6 +9,7 @@ class Product (models.Model):
     p_img_1 = models.ImageField(upload_to='static/images/',default="")
     product_price = models.IntegerField(default=0)
     date_added = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.product_name
 
